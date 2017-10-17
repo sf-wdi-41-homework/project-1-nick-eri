@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema; 
 
 var WorkspaceItemSchema = new Schema({
-	user_id: {
+	_user: {
 	    type: Schema.Types.ObjectId,
 	    ref: 'user'
   	},
-  	software_id: {
+  	_software: {
 	    type: Schema.Types.ObjectId,
 	    ref: 'software'
   	}, 
