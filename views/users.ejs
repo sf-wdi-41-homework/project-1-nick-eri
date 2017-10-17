@@ -1,3 +1,8 @@
 <% users.forEach(function(user) { %>
-  	<p><%= user.username %></p>
-  <% }); %>
+	<h2><%= user.username %></h2>
+	<p><%= user.blurb %> </p>
+	<a href="/users/<%= user._id %>">View Profile </a>
+<% }); %>
+
+
+

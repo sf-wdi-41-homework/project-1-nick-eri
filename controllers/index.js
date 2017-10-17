@@ -1,4 +1,6 @@
 module.exports = {
   	api: require('./apiController'),
-  	albums: require('./usersController'),
+  	users: require('./usersController'),
+  	softwares: require('./softwaresController'),
+  	workspaceItems: require('./workspaceItemsController')
 }

@@ -4,27 +4,27 @@ var softwares = [
 		name: 'Contexts',
 		tag: 'Productivity'
 	},
-
+	{
 		_id: 2,
 		name: 'Sublime Text',
 		tag: 'Programming'
 	},
-
+	{
 		_id: 3,
 		name: 'Adobe Photoshop',
 		tag: 'Design'
 	},
-
+	{
 		_id: 4,
 		name: 'SizeUp',
 		tag: 'Utility'
 	},
-
+	{
 		_id: 5,
 		name: 'Stay',
 		tag: 'Utility'
 	},
-
+	{
 		_id: 6,
 		name: 'Slack',
 		tag: 'Communication'
