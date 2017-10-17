@@ -5,9 +5,9 @@ var db = require('../models');
 
 function index(req, res) {
   // send back all albums as JSON
-  db.Album.find(function albumsListed(err, allAlbums) {
-    res.json(allAlbums);
-  });
+  // db.Album.find(function albumsListed(err, allAlbums) {
+  //   res.json(allAlbums);
+  // });
 }
 
 // POST /api/albums
@@ -16,9 +16,9 @@ function create(req, res) {
   var newAlbum = new db.Album(req.body);
 
   // save new todo in db
-  newAlbum.save(function handleNewAlbum(err, savedAlbum) {
-    res.json(savedAlbum);
-  });
+  // newAlbum.save(function handleNewAlbum(err, savedAlbum) {
+  //   res.json(savedAlbum);
+  // });
 }
 
 // GET /api/albums/:albumId
