@@ -1,8 +1,16 @@
-var express = require('express'),
-app = express();
-
+// Require Node Packages 
+var express = require('express');
+var flash = require('connect-flash');
+var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+var session = require('express-session');
+
+// Require controllers and models 
+var db = require('./models');
+var controllers = require('./controllers');
+
+// Initialise Express App
+app = express();
 
 app.use(function(req, res, next) {
   	res.header("Access-Control-Allow-Origin", "*");
@@ -11,13 +19,22 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(ejsLayouts);
+app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
+app.use(flash());
 
-var db = require('./models');
-var controllers = require('./controllers');
+// Express settings
+app.set('view engine', 'ejs');
+app.set("views", __dirname + "/views");
 
-app.get('/', function homepage(req, res) {
-  	res.sendFile(__dirname + '/views/index.html');
+
+app.use(function(req, res, next) {
+  next();
 });
+
+var routes = require(__dirname + "/config/routes");
+app.use(routes);
 
 app.listen(process.env.PORT || 3000, function () {
   	console.log('Express server is up and running on http://localhost:3000/');
