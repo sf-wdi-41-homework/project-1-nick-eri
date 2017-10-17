@@ -1,0 +1,72 @@
+.title {
+  border-bottom: 1px solid #000000;
+  padding-top: 20px;
+  margin-right: 200px;
+  margin-left: 200px;
+  margin-top: 30px;
+  background: url(code.jpg);
+  color: white;
+  text-decoration: bold;
+}
+
+.title h1 {
+  display: inline-block;
+  margin: 30px;
+  vertical-align: top;
+}
+
+.title p {
+  display: inline-block;
+  margin:30px;
+  margin-left: 20px;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
+  font-size: 0;
+}
+
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.header li {
+    float: left;
+}
+
+.header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.header li a:hover {
+    background-color: #111;
+}
+
+.row {
+  margin-top: 20px;
+  margin-right: 20px;
+  float:center;
+}
+
+.box {
+  background-color:red;
+  margin-top: 30px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.c1 {
+  margin-bottom: 30px;
+}
