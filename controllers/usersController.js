@@ -120,12 +120,39 @@ function show(req,res){
 
 function index(req,res){
     let userId = parseInt(req.params.id);
+    let user;
+    let workspaceItems = [];
+    let softwareItems = [];
     for(let i=0; i < usersList.length; i++){
         if(usersList[i]._id === userId){
-            res.render('userProfile.ejs', {message: req.flash('errorMessage'), user: usersList[i]})
+            user = usersList[i];
             break;
         }
     }
+
+    workspaceItemsList.forEach(function(item,i){
+        if(item._userId === userId){
+            workspaceItems.push(item);
+        }  
+    })
+
+    workspaceItems.forEach(function(workspaceItem){
+        for(let i = 0; i < softwaresList.length; i++){
+            if(workspaceItem._softwareId === softwaresList[i]._id){
+                softwareItems.push({
+                    _id:workspaceItem._id, 
+                    _userId: workspaceItem._userId,
+                    name: softwaresList[i].name,
+                    tag: softwaresList[i].tag,
+                    description: workspaceItem.description
+                })
+            }
+        }
+    })
+
+    console.log(softwareItems);
+
+    res.render('userProfile.ejs', {message: req.flash('errorMessage'), user: user, softwares: softwareItems})
 }
 
 module.exports = {
