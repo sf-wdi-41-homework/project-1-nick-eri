@@ -28,12 +28,7 @@ app.use(flash());
 app.set('view engine', 'ejs');
 app.set("views", __dirname + "/views");
 
-
-app.use(function(req, res, next) {
-  next();
-});
-
-var routes = require(__dirname + "/config/routes");
+var routes = require("./config/routes");
 app.use(routes);
 
 app.listen(process.env.PORT || 3000, function () {

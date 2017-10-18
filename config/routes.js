@@ -1,11 +1,15 @@
-var express           = require('express');
-var router            = express.Router();
-var staticsController = require('../controllers/staticsController');
+var express = require('express');
+var router = express.Router();
+var controllers = require('../controllers')
+
 
 router.route('/')
-  	.get(staticsController.home);
+  	.get(controllers.statics.home);
 
 router.route('/users')
-	.get(staticsController.users);
-  
+	.get(controllers.users.users);
+
+router.route('/users/:id')
+	.get(controllers.users.index);
+
 module.exports = router;
