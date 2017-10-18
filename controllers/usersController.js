@@ -114,7 +114,7 @@ var workspaceItemsList = [
 // controllers/usersContoller.js
 var db = require('../models');
 
-function users(req,res){
+function show(req,res){
     res.render('users.ejs', {message: req.flash('errorMessage'), users: usersList });
 }
 
@@ -129,6 +129,6 @@ function index(req,res){
 }
 
 module.exports = {
-    users: users,
+    show: show,
     index: index
 };
