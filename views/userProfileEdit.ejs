@@ -1,0 +1,32 @@
+
+<h2><%= user.username %></h2>
+<img src="/images/<%= user.avatar %>" alt="user.username">
+<form method="post" action="/users/<%= user._id %>/edit">
+  	<div class="form-group">
+    	<label for="job_title">Job Title</label>
+    	<input class="form-control" type="text" name="job_title" id="job_title" value="<%= user.jobTitle %>">
+  	</div>
+
+  	<div class="form-group">
+	    <label for="job_field">Job Field</label>
+	    <input class="form-control" type="text" name="job_field" id="job_field" value="<%= user.jobField %>">
+  	</div>
+
+  	<div class="form-group">
+	    <label for="blurb">Blurb</label>
+	    <textarea class="form-control" type="text" name="blurb" id="blurb"><%= user.blurb %></textarea> 
+  	</div>
+
+	<% softwares.forEach(function(software) { %>
+		<div class="form-group">
+			<label for="<%= software._id %>"><%= software.name %></label> 
+			<button _id="<%= software._id %>" class="btn btn-danger">Remove</button>
+			<textarea class="form-control" name="<%= software._id %>"><%= software.description %></textarea>
+		</div>
+	<% }); %>
+
+  	<input class="btn btn-success" type="submit" value="Save">
+</form>
+
+<style>
+</style>

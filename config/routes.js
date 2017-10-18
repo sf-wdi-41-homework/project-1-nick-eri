@@ -12,4 +12,8 @@ router.route('/users')
 router.route('/users/:id')
 	.get(controllers.users.index);
 
+router.route('/users/:id/edit')
+	.get(controllers.users.getEdit)
+	.post(controllers.users.update);
+
 module.exports = router;
