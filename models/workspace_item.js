@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 var WorkspaceItemSchema = new Schema({
 	_userId: {
 	    type: Schema.Types.ObjectId,
-	    ref: 'user'
+	    ref: 'User'
   	},
   	_softwareId: {
 	    type: Schema.Types.ObjectId,
-	    ref: 'software'
+	    ref: 'Software'
   	}, 
   	description: String
 })

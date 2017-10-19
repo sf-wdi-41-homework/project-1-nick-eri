@@ -1,7 +1,7 @@
 
 <h2><%= user.username %></h2>
 <img src="/images/<%= user.avatar %>" alt="user.username">
-<form method="post" action="/users/<%= user._id %>/edit">
+<form method="post" action="/users/<%= user.username %>/edit">
   	<div class="form-group">
     	<label for="job_title">Job Title</label>
     	<input class="form-control" type="text" name="jobTitle" id="job_title" value="<%= user.jobTitle %>">

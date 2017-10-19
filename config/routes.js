@@ -9,10 +9,10 @@ router.route('/')
 router.route('/users')
 	.get(controllers.users.show);
 
-router.route('/users/:id')
+router.route('/users/:username')
 	.get(controllers.users.index);
 
-router.route('/users/:id/edit')
+router.route('/users/:username/edit')
 	.get(controllers.users.edit)
 	.post(controllers.users.update);
 
