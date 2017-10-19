@@ -1,6 +1,6 @@
 // require mongoose and connect to database
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/work_bettah');
+mongoose.connect('mongodb://localhost/work_better');
 
 module.exports = {
   	Software: require('./software'),

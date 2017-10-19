@@ -1,41 +1,34 @@
 var db = require("./models");
 
-var softwares = [
+var softwaresList = [
 	{
-		_id: 1,
 		name: 'Contexts',
 		tag: 'Productivity'
 	},
-
-		_id: 2,
+	{
 		name: 'Sublime Text',
 		tag: 'Programming'
 	},
-
-		_id: 3,
+	{
 		name: 'Adobe Photoshop',
 		tag: 'Design'
 	},
-
-		_id: 4,
+	{
 		name: 'SizeUp',
 		tag: 'Utility'
 	},
-
-		_id: 5,
+	{
 		name: 'Stay',
 		tag: 'Utility'
 	},
-
-		_id: 6,
+	{
 		name: 'Slack',
 		tag: 'Communication'
 	},
 ]
 
-var users = [
+var usersList = [
 	{
-		_id:1,
 		username: 'severejetlag',
 		fName: 'Nick',
 		lName: 'Lee',
@@ -46,7 +39,6 @@ var users = [
 		votes: 20
 	}, 
 	{
-		_id:2,
 		username: 'severejetlag2',
 		fName: 'Nick2',
 		lName: 'Lee',
@@ -57,7 +49,6 @@ var users = [
 		votes: 30
 	},
 	{
-		_id:3,
 		username: 'severejetlag3',
 		fName: 'Nick3',
 		lName: 'Lee',
@@ -68,7 +59,6 @@ var users = [
 		votes: 40
 	},
 	{
-		_id: 4,
 		username: 'severejetlag4',
 		fName: 'Nick4',
 		lName: 'Lee',
@@ -80,41 +70,85 @@ var users = [
 	}
 ]
 
-var workspaceItems = [
+var workspaceItemsList = [
 	{
-		_id:1,
-		_userId:1,
-		_softwareId:1,
+		username:'severejetlag',
+		name: 'Contexts',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod ipsam necessitatibus quidem voluptates vel, voluptate ab, libero velit nobis eum, laborum accusamus et dicta similique! Quod, eum repudiandae optio corrupti!'
 	},
 	{
-		_id:2,
-		_userId:1,
-		_softwareId:2,
+		username:'severejetlag',
+		name: 'Sublime Text',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod ipsam necessitatibus quidem voluptates vel, voluptate ab, libero velit nobis eum, laborum accusamus et dicta similique! Quod, eum repudiandae optio corrupti!'
 	},
 	{
-		_id:3,
-		_userId:1,
-		_softwareId:3,
+		username:'severejetlag',
+		name: 'Adobe Photoshop',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod ipsam necessitatibus quidem voluptates vel, voluptate ab, libero velit nobis eum, laborum accusamus et dicta similique! Quod, eum repudiandae optio corrupti!'
 	},
 	{
-		_id:4,
-		_userId:2,
-		_softwareId:1,
+		username:'severejetlag2',
+		name: 'Contexts',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod ipsam necessitatibus quidem voluptates vel, voluptate ab, libero velit nobis eum, laborum accusamus et dicta similique! Quod, eum repudiandae optio corrupti!'
 	},
 	{
-		_id:5,
-		_userId:2,
-		_softwareId:5,
+		username:'severejetlag2',
+		name: 'Stay',
 		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod ipsam necessitatibus quidem voluptates vel, voluptate ab, libero velit nobis eum, laborum accusamus et dicta similique! Quod, eum repudiandae optio corrupti!'
 	}
 ]
 
 
-
+db.User.remove({}, function(err, users){
+  	db.User.create(usersList, function(err, users){
+	    // code in here runs after all albums are created
+	    if (err) { return console.log('ERROR', err); }
+	    console.log("all users:", users);
+	    console.log("created", users.length, "users");
+		db.Software.remove({}, function(err, users){
+			db.Software.create(softwaresList, function(err, softwares){
+				if(err) {return console.log('ERROR', err);}
+				console.log("all softwares:", softwares);
+				console.log('created', softwares.length, 'softwares');
+				db.WorkspaceItem.remove({}, function(err, workspaceItems){
+					console.log('removed all workspaceItems');
+					workspaceItemsList.forEach(function(workspaceItemData) {
+						var workspaceItem = new db.WorkspaceItem({
+				          	description: workspaceItemData.description
+						});
+				        db.User.findOne({username: workspaceItemData.username}, function (err, foundUser) {
+				          	console.log(`found user ${foundUser.username} for for workspace item ${workspaceItem.description}`);
+				          	if (err) {
+				            	console.log(err);
+				            	return;
+				          	}
+				          	workspaceItem._userId = foundUser._id;
+				          	console.log("\nUSER\N",foundUser._id)				   
+							db.Software.findOne({name: workspaceItemData.name}, function (err, foundSoftware) {
+					          	console.log(`found software ${foundSoftware.name} for for workspace item ${workspaceItem.description}`);
+					          	if (err) {
+					            	console.log(err);
+					            	return;
+					          	}
+					          	console.log("\nSOFTWARE\n",foundSoftware._id)				   
+					          	workspaceItem._softwareId = foundSoftware._id;
+					          	workspaceItem.save(function(err, saveWorkspaceItem){
+							        	if (err) {
+							          		return console.log(err);
+										}
+										console.log('saved workspace item');
+										process.exit(0);
+									});
+								});
+							});
+						
+				      	
+					});
+				});
+			});
+		});
+  	});
+});
 
 
 
