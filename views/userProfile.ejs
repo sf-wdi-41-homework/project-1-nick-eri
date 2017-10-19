@@ -8,7 +8,7 @@
 <ul>
 	<% workspaceItems.forEach(function(item) { %>
 		<li _id="<%= item._id %>">
-			<h3><%= item.name %></h3>
+			<h3><%= item._softwareId.name %></h3>
 			<p><%= item.description %></p>
 			<button _id="<%= item._id %>" class="btn btn-danger remove-workspaceItem">Remove</button>	
 		</li>

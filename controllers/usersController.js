@@ -13,13 +13,14 @@ function index(req,res){
             return;
         }
         db.WorkspaceItem.find({_userId: foundUser._id})
-            .populate('user')
-            .populate('software')
+            .populate('_userId')
+            .populate('_softwareId')
             .exec(function(err, workspaceItems){
                 if(err){
                     res.status(500).send(err);
                     return;
                 }
+                console.log("\nWSI: \n",workspaceItems);
                 res.render(
                     'userProfile.ejs', 
                     {
