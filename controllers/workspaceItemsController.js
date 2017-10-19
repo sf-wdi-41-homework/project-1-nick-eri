@@ -112,7 +112,24 @@ var workspaceItemsList = [
 ]
 
 
+var db = require('../models');
 
+function destroy(req,res){
+	console.log("new array");
+	console.log(workspaceItemsList);
+	let workspaceItem_id = parseInt(req.params.id);
+	for(let i = 0; i < workspaceItemsList.length; i++){
+		if(workspaceItem_id === workspaceItemsList[i]._id){
+			res.json(workspaceItemsList[i]);
+			workspaceItemsList.splice(i, 1);
+			break; 
+		}
+	}
+}
+
+module.exports = {
+    destroy: destroy
+};
 
 
 

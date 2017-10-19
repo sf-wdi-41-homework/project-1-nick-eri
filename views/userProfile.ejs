@@ -4,7 +4,14 @@
 <h3><%= user.jobTitle %></h3>
 <h3><%= user.jobField %></h3>
 <p><%= user.blurb %></p>
-<% softwares.forEach(function(software) { %>
-	<h3><%= software.name %></h3>
-	<p><%= software.description %></p>
-<% }); %>
+
+<ul>
+	<% workspaceItems.forEach(function(item) { %>
+		<li _id="<%= item._id %>">
+			<h3><%= item.name %></h3>
+			<p><%= item.description %></p>
+			<button _id="<%= item._id %>" class="btn btn-danger remove-workspaceItem">Remove</button>	
+		</li>
+	<% }); %>
+</ul>
+  
