@@ -12,6 +12,7 @@ function index(req,res){
             console.log(err);
             return;
         }
+        console.log(foundUser);
         db.WorkspaceItem.find({_userId: foundUser._id})
             .populate('_userId')
             .populate('_softwareId')
@@ -20,7 +21,6 @@ function index(req,res){
                     res.status(500).send(err);
                     return;
                 }
-                console.log("\nWSI: \n",workspaceItems);
                 res.render(
                     'userProfile.ejs', 
                     {
@@ -50,19 +50,20 @@ function edit(req,res){
 }
 
 function update(req,res){
-    let userId = parseInt(req.params.id);
-    console.log(req.body);
-    for(let i = 0; i < usersList.length; i++){
-        if(userId === usersList[i]._id){
-            usersList[i].jobTitle = req.body.jobTitle;
-            usersList[i].jobTitle = req.body.jobTitle;
-            usersList[i].blurb = req.body.blurb;
-            break;
+    let username = req.params.username;
+    db.User.findOne({username: username}, function (err, foundUser) {
+        if (err) {
+            console.log(err);
+            return;
         }
-    }
-
-    let userInfo = userData(userId);
-    res.redirect(`/users/${userId}`);
+        foundUser.jobTitle = req.body.jobTitle;
+        foundUser.jobField = req.body.jobField;
+        foundUser.blurb = req.body.blurb;
+        foundUser.save(function(err, saved) {
+            console.log('Updated ', foundUser.username);
+            res.redirect(`/users/${foundUser.username}`);
+        });
+    });
 }
 
     
