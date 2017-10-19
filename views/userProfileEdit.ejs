@@ -17,14 +17,6 @@
 	    <textarea class="form-control" type="text" name="blurb" id="blurb"><%= user.blurb %></textarea> 
   	</div>
 
-	<% softwares.forEach(function(software) { %>
-		<div class="form-group">
-			<label for="<%= software._id %>"><%= software.name %></label> 
-			<button _id="<%= software._id %>" class="btn btn-danger">Remove</button>
-			<textarea class="form-control" name="<%= software._id %>"><%= software.description %></textarea>
-		</div>
-	<% }); %>
-
   	<input class="btn btn-success" type="submit" value="Save">
 </form>
 

@@ -120,81 +120,84 @@ function show(req,res){
 
 function index(req,res){
     let userId = parseInt(req.params.id);
-    let user;
-    let workspaceItems = [];
-    let softwareItems = [];
-    for(let i=0; i < usersList.length; i++){
-        if(usersList[i]._id === userId){
-            user = usersList[i];
-            break;
-        }
-    }
+    let userInfo = userData(userId);
 
-    workspaceItemsList.forEach(function(item,i){
-        if(item._userId === userId){
-            workspaceItems.push(item);
-        }  
-    })
-
-    workspaceItems.forEach(function(workspaceItem){
-        for(let i = 0; i < softwaresList.length; i++){
-            if(workspaceItem._softwareId === softwaresList[i]._id){
-                softwareItems.push({
-                    _id:workspaceItem._id, 
-                    _userId: workspaceItem._userId,
-                    name: softwaresList[i].name,
-                    tag: softwaresList[i].tag,
-                    description: workspaceItem.description
-                })
-            }
-        }
-    })
-
-    res.render('userProfile.ejs', {message: req.flash('errorMessage'), user: user, softwares: softwareItems})
+    res.render(
+        'userProfile.ejs', 
+        {
+            message: req.flash('errorMessage'), 
+            user: userInfo.user, 
+            workspaceItems: userInfo.softwareItems
+        });
 }
 
-function getEdit(req,res){
+function edit(req,res){
     let userId = parseInt(req.params.id);
-    let user;
-    let workspaceItems = [];
-    let softwareItems = [];
-    for(let i=0; i < usersList.length; i++){
-        if(usersList[i]._id === userId){
-            user = usersList[i];
-            break;
-        }
-    }
-
-    workspaceItemsList.forEach(function(item,i){
-        if(item._userId === userId){
-            workspaceItems.push(item);
-        }  
-    })
-
-    workspaceItems.forEach(function(workspaceItem){
-        for(let i = 0; i < softwaresList.length; i++){
-            if(workspaceItem._softwareId === softwaresList[i]._id){
-                softwareItems.push({
-                    _id:workspaceItem._id, 
-                    _userId: workspaceItem._userId,
-                    name: softwaresList[i].name,
-                    tag: softwaresList[i].tag,
-                    description: workspaceItem.description
-                })
-            }
-        }
-    })
-    res.render('userProfileEdit.ejs', {message: req.flash('errorMessage'), user: user, softwares: softwareItems})
+    let userInfo = userData(userId);
+    res.render(
+        'userProfileEdit.ejs', 
+        {
+            message: req.flash('errorMessage'), 
+            user: userInfo.user, 
+            workspaceItems: userInfo.softwareItems
+        });
 
 }
 
 function update(req,res){
+    let userId = parseInt(req.params.id);
     console.log(req.body);
+    for(let i = 0; i < usersList.length; i++){
+        if(userId === usersList[i]._id){
+            usersList[i].jobTitle = req.body.jobTitle;
+            usersList[i].jobTitle = req.body.jobTitle;
+            usersList[i].blurb = req.body.blurb;
+            break;
+        }
+    }
+
+    let userInfo = userData(userId);
+    res.redirect(`/users/${userId}`);
 }
 
+// Function to grab user and software list to be reused
+function userData(userId){
+    let user;
+    let workspaceItems = [];
+    let softwareItems = [];
+    for(let i=0; i < usersList.length; i++){
+        if(usersList[i]._id === userId){
+            user = usersList[i];
+            break;
+        }
+    }
+
+    workspaceItemsList.forEach(function(item,i){
+        if(item._userId === userId){
+            workspaceItems.push(item);
+        }  
+    })
+
+    workspaceItems.forEach(function(workspaceItem){
+        for(let i = 0; i < softwaresList.length; i++){
+            if(workspaceItem._softwareId === softwaresList[i]._id){
+                softwareItems.push({
+                    _id:workspaceItem._id, 
+                    _userId: workspaceItem._userId,
+                    name: softwaresList[i].name,
+                    tag: softwaresList[i].tag,
+                    description: workspaceItem.description
+                })
+            }
+        }
+    })
+
+    return {user: user, softwareItems: softwareItems};
+}
+    
 module.exports = {
     show: show,
     index: index,
-    getEdit: getEdit,
+    edit: edit,
     update: update
 };
