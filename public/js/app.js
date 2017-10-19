@@ -3,7 +3,6 @@ $(document).ready(function(){
 	console.log("Sanity Check!")
 
 	$('.remove-workspaceItem').on('click', function(event){
-		console.log('remove clicked');
 		event.preventDefault();
 		removeWorkspaceItem(this);
 	});

@@ -2,7 +2,18 @@
 var db = require('../models');
 
 function show(req,res){
-    res.render('users.ejs', {message: req.flash('errorMessage'), users: usersList });
+    db.User.find({}).exec(function(err, users){
+        if(err){
+            console.log(err);
+            return; 
+        }
+        res.render(
+            'users.ejs',
+            {
+                message: req.flash('errorMessage'),
+                users: users
+            })
+    })
 }
 
 function index(req,res){
@@ -12,23 +23,26 @@ function index(req,res){
             console.log(err);
             return;
         }
-        console.log(foundUser);
-        db.WorkspaceItem.find({_userId: foundUser._id})
-            .populate('_userId')
-            .populate('_softwareId')
-            .exec(function(err, workspaceItems){
-                if(err){
-                    res.status(500).send(err);
-                    return;
-                }
-                res.render(
-                    'userProfile.ejs', 
-                    {
-                        message: req.flash('errorMessage'), 
-                        user: foundUser, 
-                        workspaceItems: workspaceItems
-                    });
-            });
+        if(foundUser){  
+            db.WorkspaceItem.find({_userId: foundUser._id})
+                .populate('_userId')
+                .populate('_softwareId')
+                .exec(function(err, workspaceItems){
+                    if(err){
+                        res.status(500).send(err);
+                        return;
+                    }
+                    res.render(
+                        'userProfile.ejs', 
+                        {
+                            message: req.flash('errorMessage'), 
+                            user: foundUser, 
+                            workspaceItems: workspaceItems
+                        });
+                });
+        }else{
+            res.send('user not found');
+        }
     });
 }
 
