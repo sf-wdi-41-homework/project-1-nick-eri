@@ -16,4 +16,7 @@ router.route('/users/:id/edit')
 	.get(controllers.users.edit)
 	.post(controllers.users.update);
 
+router.route('/workspaceItems/:id')
+	.delete(controllers.workspaceItems.destroy);
+
 module.exports = router;

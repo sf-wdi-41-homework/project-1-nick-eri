@@ -10,8 +10,21 @@ $(document).ready(function(){
 // End Doctument Ready 
 
 function removeWorkspaceItem(clickedItem){
-	console.log('Rmove clicked');
-	console.log(clickedItem);
 	let workspaceItem_id = $(clickedItem).attr('_id');
-	console.log(workspaceItem_id);
+
+	$.ajax({
+		url: `/workspaceItems/${workspaceItem_id}`,
+		method: 'DELETE',
+		success: workspaceItemDeleteSuccess,
+		error: workspaceItemDeleteError
+	});
+}
+
+function workspaceItemDeleteSuccess(json){
+	console.log(json);
+	$(`li[_id="${json._id}"]`).remove();
+}
+
+function workspaceItemDeleteError(){
+	console.log("Delete error!");
 }
