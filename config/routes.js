@@ -12,7 +12,7 @@ router.route('/users')
 router.route('/users/:username')
 	.get(controllers.users.index);
 
-router.route('/users/:id/edit')
+router.route('/users/:username/edit')
 	.get(controllers.users.edit)
 	.post(controllers.users.update);
 

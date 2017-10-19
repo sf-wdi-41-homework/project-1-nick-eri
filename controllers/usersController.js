@@ -7,34 +7,44 @@ function show(req,res){
 
 function index(req,res){
     let username = req.params.username;
-    // let userInfo = userData(userId);
     db.User.findOne({username: username}, function (err, foundUser) {
-        console.log(`found user ${foundAuthor.username}`);
-        res.json(foundUser)
         if (err) {
             console.log(err);
             return;
         }
+        db.WorkspaceItem.find({_userId: foundUser._id})
+            .populate('user')
+            .populate('software')
+            .exec(function(err, workspaceItems){
+                if(err){
+                    res.status(500).send(err);
+                    return;
+                }
+                res.render(
+                    'userProfile.ejs', 
+                    {
+                        message: req.flash('errorMessage'), 
+                        user: foundUser, 
+                        workspaceItems: workspaceItems
+                    });
+            });
     });
-    // res.render(
-    //     'userProfile.ejs', 
-    //     {
-    //         message: req.flash('errorMessage'), 
-    //         user: userInfo.user, 
-    //         workspaceItems: userInfo.softwareItems
-    //     });
 }
 
 function edit(req,res){
-    let userId = parseInt(req.params.id);
-    let userInfo = userData(userId);
-    res.render(
-        'userProfileEdit.ejs', 
-        {
-            message: req.flash('errorMessage'), 
-            user: userInfo.user, 
-            workspaceItems: userInfo.softwareItems
-        });
+    let username = req.params.username;
+    db.User.findOne({username: username}, function (err, foundUser) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render(
+            'userProfileEdit.ejs', 
+            {
+                message: req.flash('errorMessage'), 
+                user: foundUser
+            });
+    });
 
 }
 
@@ -54,40 +64,6 @@ function update(req,res){
     res.redirect(`/users/${userId}`);
 }
 
-// Function to grab user and software list to be reused
-function userData(userId){
-    let user;
-    let workspaceItems = [];
-    let softwareItems = [];
-    for(let i=0; i < usersList.length; i++){
-        if(usersList[i]._id === userId){
-            user = usersList[i];
-            break;
-        }
-    }
-
-    workspaceItemsList.forEach(function(item,i){
-        if(item._userId === userId){
-            workspaceItems.push(item);
-        }  
-    })
-
-    workspaceItems.forEach(function(workspaceItem){
-        for(let i = 0; i < softwaresList.length; i++){
-            if(workspaceItem._softwareId === softwaresList[i]._id){
-                softwareItems.push({
-                    _id:workspaceItem._id, 
-                    _userId: workspaceItem._userId,
-                    name: softwaresList[i].name,
-                    tag: softwaresList[i].tag,
-                    description: workspaceItem.description
-                })
-            }
-        }
-    })
-
-    return {user: user, softwareItems: softwareItems};
-}
     
 module.exports = {
     show: show,
