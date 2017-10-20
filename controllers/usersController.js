@@ -1,5 +1,6 @@
 // controllers/usersContoller.js
 var db = require('../models');
+var passport = require("passport")
 
 function show(req,res){
     db.User.find({}).exec(function(err, users){
