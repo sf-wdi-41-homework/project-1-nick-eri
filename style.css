@@ -21,6 +21,7 @@
   margin-left: 20px;
 }
 
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -54,19 +55,19 @@
     background-color: #111;
 }
 
-.row {
-  margin-top: 20px;
-  margin-right: 20px;
-  float:center;
-}
-
-.box {
-  background-color:red;
-  margin-top: 30px;
-  padding-top:20px;
-  padding-bottom:20px;
-}
-
 .c1 {
   margin-bottom: 30px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.name {
+    color: grey;
+    font-size: 18px;
 }
