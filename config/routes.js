@@ -36,7 +36,7 @@ router.route('/newprofile/:id/complete')
 
 router.route('/login')
   .get(unAuthenticatedUser, controllers.users.getLogin)
-  .post(usersController.postLogin)
+  .post(controllers.users.postLogin)
 
 router.route('/users')
 	.get(controllers.users.show);
