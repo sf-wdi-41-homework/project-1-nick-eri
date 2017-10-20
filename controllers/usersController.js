@@ -1,9 +1,7 @@
-// controllers/usersContoller.js
+// Functions handling routing for user information
 var db = require('../models');
-var passport = require("passport")
 
-
-// Shows a list of all users logged into the site 
+// GET Shows a list of all users logged into the site 
 function show(req,res){
     db.User.find({}).exec(function(err, users){
         if(err){
@@ -19,7 +17,7 @@ function show(req,res){
     })
 }
 
-// Displays the page of a user when given the username 
+// GET Displays the page of a user when given the username 
 function index(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -50,7 +48,7 @@ function index(req,res){
     });
 }
 
-// Displays form page for updating basic profile information 
+// GET Displays form page for updating basic profile information 
 function edit(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -68,7 +66,7 @@ function edit(req,res){
 
 }
 
-// Saves the updated information from the edit page. 
+// PUT Saves the updated information from the edit page. 
 function update(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -85,7 +83,6 @@ function update(req,res){
         });
     });
 }
-
     
 module.exports = {
     show: show,
