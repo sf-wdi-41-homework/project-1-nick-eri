@@ -1,7 +1,7 @@
 <% users.forEach(function(user) { %>
 	<h2><%= user.username %></h2>
 	<p><%= user.blurb %> </p>
-	<a href="/users/<%= user._id %>">View Profile </a>
+	<a href="/users/<%= user.username %>">View Profile </a>
 <% }); %>
 
 

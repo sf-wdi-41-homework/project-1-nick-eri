@@ -19,4 +19,7 @@ router.route('/users/:username/edit')
 router.route('/workspaceItems/:id')
 	.delete(controllers.workspaceItems.destroy);
 
+router.route('/software/search/:software')
+	.get(controllers.softwares.search);
+
 module.exports = router;

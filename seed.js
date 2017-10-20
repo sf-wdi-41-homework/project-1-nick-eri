@@ -25,6 +25,46 @@ var softwaresList = [
 		name: 'Slack',
 		tag: 'Communication'
 	},
+	{
+		name: 'Telegram',
+		tag: 'Communication'
+	},
+	{
+		name: 'Adobe InDesign',
+		tag: 'Design'
+	},
+	{
+		name: 'Microsoft Word',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Microsoft PowerPoint',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Microsoft Excel',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Google Docs',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Google Sheets',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Google Slides',
+		tag: 'Productivity'
+	},
+	{
+		name: 'Atom',
+		tag: 'Programming'
+	},
+	{
+		name: 'Robo 3T',
+		tag: 'Programming'
+	}
 ]
 
 var usersList = [
