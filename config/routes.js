@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var controllers = require('../controllers');
+// unused import
 var passport = require("passport");
 
 function authenticatedUser(req, res, next) {
@@ -46,6 +47,7 @@ router.route('/users/:username')
 
 router.route('/users/:username/edit')
 	.get(controllers.users.edit)
+	// TODO: Error "cannot POST to /users/devname"?
 	.post(controllers.users.update);
 
 router.route('/workspaceItems/:id')

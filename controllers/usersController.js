@@ -19,7 +19,9 @@ function postSignup(req, res) {
 }
 
 function newProfile(req,res){
-    res.render('newprofile.ejs');
+    // only need to enter the name of the ejs template XXXkay
+    // res.render(templateName)
+    res.render('newProfile');
 }
 
 function newProfileUpdate(req,res){
@@ -131,13 +133,18 @@ function update(req,res){
             console.log(err);
             return;
         }
+        // You'll want to do a check here to look for a *change* in each field value.
+        // If my jobTitle said Dev at first and then I used this form to
+        // edit only jobField, jobTitle would then have it's value returned
+        // as an empty string since I didn't fill it out on the form the second
+        // time.
         foundUser.jobTitle = req.body.jobTitle;
         foundUser.jobField = req.body.jobField;
         foundUser.blurb = req.body.blurb;
         foundUser.save(function(err, saved) {
             console.log('Updated ', foundUser.username);
-            res.redirect(`/users/${foundUser.username}`);
         });
+        res.redirect(`/users/${foundUser.username}`);
     });
 }
 
