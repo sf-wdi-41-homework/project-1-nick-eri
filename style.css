@@ -71,3 +71,18 @@
     color: grey;
     font-size: 18px;
 }
+
+#form1 {
+ display : none;
+}
+button {
+ margin-bottom: 10px;
+}
+
+.signup {
+  float: right;
+}
+
+.login {
+  float:right;
+}

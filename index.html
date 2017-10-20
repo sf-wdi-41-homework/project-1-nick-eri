@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Astloch">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -12,15 +13,26 @@
 <div class="header">
 <header>
 <ul>
-  <li><a href="">Home</a></li>
-  <li><a href="">Users</a></li>
-  <li><a href="">Login</a></li>
-  <li><a href="">Signup</a></li>
+  <li><button id="home">Home</button></li>
+  <li><button id="users">Users</button></li>
+  <li><div id-"signup"><button id="signup">Sign Up</button>
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="POST"  id="form1">
+        <input name="user" type="text" placeholder="Username" size="30" >
+        <input name="pass" type="password" placeholder="Password"  size="30" >
+        <input class="btn" type="submit" value="sign up" name="signup">
+    </form>
+  </div></li>
+  <li><div id="login"><button id="login">Login</button>
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="POST"  id="form2">
+        <input name="user" type="text" placeholder="Username" size="30" >
+        <input name="pass" type="password" placeholder="Password"  size="30" >
+        <input class="btn" type="submit" value="login" name="login">
+  </div></li>
 </ul>
 </header>
 </div>
 <div class="title">
-<h1>Site Name</h1>
+<h1>Work Better</h1>
 <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
