@@ -1,5 +1,7 @@
+// Functions to handle the bridge workspace item model 
 var db = require('../models');
 
+// Handles user removing list items from their profile 
 function destroy(req,res){
 	let workspaceItem_id = parseInt();
 

@@ -1,67 +1,7 @@
-// controllers/usersContoller.js
+// Functions handling routing for user information
 var db = require('../models');
-var passport = require("passport")
 
-// GET /signup
-function getSignup(req, res) {
-    res.render('signup', { message: req.flash('errorMessage') })
-}
-
-// POST /signup
-function postSignup(req, res) {
-    var signupStrategy = passport.authenticate('local-signup', {
-        successRedirect: "/newprofile",
-        failureRedirect: "/signup",
-        failureFlash: true
-    });
-
-    return signupStrategy(req, res);
-}
-
-function newProfile(req,res){
-    res.render('newprofile.ejs');
-}
-
-function newProfileUpdate(req,res){
-    db.User.findById(req.params.id, function(err,foundUser){
-        if (err) {
-            console.log(err);
-            return;
-        }
-        foundUser.username = req.body.username;
-        foundUser.jobTitle = req.body.jobTitle;
-        foundUser.jobField = req.body.jobField;
-        foundUser.blurb = req.body.blurb;
-        foundUser.save(function(err, saved) {
-            console.log('Updated ', foundUser.username);
-            res.redirect(`/users/${foundUser.username}`);
-        });
-    });
-}
-
-// GET /login
-function getLogin(req, res) { 
-  res.render('login', { message: req.flash('errorMessage') })
-}
-
-// POST /login 
-function postLogin(req, res) {
-  var loginStrategy = passport.authenticate('local-login', {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true
-  });
-
-  return loginStrategy(req, res);
-}
-
-// GET /logout
-function getLogout(req, res) {
-  req.logout();
-  res.redirect("/");
-}
-
-
+// GET Shows a list of all users logged into the site 
 function show(req,res){
     db.User.find({}).exec(function(err, users){
         if(err){
@@ -77,6 +17,7 @@ function show(req,res){
     })
 }
 
+// GET Displays the page of a user when given the username 
 function index(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -107,6 +48,7 @@ function index(req,res){
     });
 }
 
+// GET Displays form page for updating basic profile information 
 function edit(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -124,6 +66,7 @@ function edit(req,res){
 
 }
 
+// PUT Saves the updated information from the edit page. 
 function update(req,res){
     let username = req.params.username;
     db.User.findOne({username: username}, function (err, foundUser) {
@@ -140,16 +83,8 @@ function update(req,res){
         });
     });
 }
-
     
 module.exports = {
-    getSignup: getSignup,
-    postSignup: postSignup,
-    newProfile: newProfile,
-    newProfileUpdate: newProfileUpdate,
-    getLogin: getLogin,
-    postLogin: postLogin,
-    getLogout: getLogout,
     show: show,
     index: index,
     edit: edit,
