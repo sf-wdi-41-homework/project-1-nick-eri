@@ -4,6 +4,10 @@ var flash = require('connect-flash');
 var ejsLayouts = require("express-ejs-layouts");
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override'); 
 
 // Require controllers and models 
 var db = require('./models');
