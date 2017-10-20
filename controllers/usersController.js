@@ -39,6 +39,29 @@ function newProfileUpdate(req,res){
     });
 }
 
+// GET /login
+function getLogin(req, res) { 
+  res.render('login', { message: req.flash('errorMessage') })
+}
+
+// POST /login 
+function postLogin(req, res) {
+  var loginStrategy = passport.authenticate('local-login', {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true
+  });
+
+  return loginStrategy(req, res);
+}
+
+// GET /logout
+function getLogout(req, res) {
+  req.logout();
+  res.redirect("/");
+}
+
+
 function show(req,res){
     db.User.find({}).exec(function(err, users){
         if(err){
@@ -124,6 +147,9 @@ module.exports = {
     postSignup: postSignup,
     newProfile: newProfile,
     newProfileUpdate: newProfileUpdate,
+    getLogin: getLogin,
+    postLogin: postLogin,
+    getLogout: getLogout,
     show: show,
     index: index,
     edit: edit,
