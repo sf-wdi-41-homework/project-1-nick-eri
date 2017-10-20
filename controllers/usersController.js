@@ -2,6 +2,43 @@
 var db = require('../models');
 var passport = require("passport")
 
+// GET /signup
+function getSignup(req, res) {
+    res.render('signup', { message: req.flash('errorMessage') })
+}
+
+// POST /signup
+function postSignup(req, res) {
+    var signupStrategy = passport.authenticate('local-signup', {
+        successRedirect: "/newprofile",
+        failureRedirect: "/signup",
+        failureFlash: true
+    });
+
+    return signupStrategy(req, res);
+}
+
+function newProfile(req,res){
+    res.render('newprofile.ejs');
+}
+
+function newProfileUpdate(req,res){
+    db.User.findById(req.params.id, function(err,foundUser){
+        if (err) {
+            console.log(err);
+            return;
+        }
+        foundUser.username = req.body.username;
+        foundUser.jobTitle = req.body.jobTitle;
+        foundUser.jobField = req.body.jobField;
+        foundUser.blurb = req.body.blurb;
+        foundUser.save(function(err, saved) {
+            console.log('Updated ', foundUser.username);
+            res.redirect(`/users/${foundUser.username}`);
+        });
+    });
+}
+
 function show(req,res){
     db.User.find({}).exec(function(err, users){
         if(err){
@@ -83,6 +120,10 @@ function update(req,res){
 
     
 module.exports = {
+    getSignup: getSignup,
+    postSignup: postSignup,
+    newProfile: newProfile,
+    newProfileUpdate: newProfileUpdate,
     show: show,
     index: index,
     edit: edit,

@@ -24,6 +24,16 @@ function unAuthenticatedUser(req, res, next) {
 router.route('/')
   	.get(controllers.statics.home);
 
+router.route('/signup')
+  	.get(unAuthenticatedUser, controllers.users.getSignup)
+  	.post(controllers.users.postSignup);
+
+router.route('/newprofile')
+	.get(authenticatedUser, controllers.users.newProfile);
+
+router.route('/newprofile/:id/complete')
+	.post(authenticatedUser, controllers.users.newProfileUpdate);
+
 router.route('/users')
 	.get(controllers.users.show);
 
