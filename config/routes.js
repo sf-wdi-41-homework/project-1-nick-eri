@@ -21,36 +21,50 @@ function unAuthenticatedUser(req, res, next) {
 	return res.redirect('/');
 }
 
+// Hoem page route
 router.route('/')
   	.get(controllers.statics.home);
 
+// Signup route 
 router.route('/signup')
-  	.get(unAuthenticatedUser, controllers.users.getSignup)
-  	.post(controllers.users.postSignup);
+  	.get(unAuthenticatedUser, controllers.auth.getSignup)
+  	.post(controllers.auth.postSignup);
 
+// Route after signup POST 
 router.route('/newprofile')
-	.get(authenticatedUser, controllers.users.newProfile);
+	.get(authenticatedUser, controllers.auth.newProfile);
 
+// Route once new profile updated 
 router.route('/newprofile/:id/complete')
-	.post(authenticatedUser, controllers.users.newProfileUpdate);
+	.post(authenticatedUser, controllers.auth.newProfileUpdate);
 
+// Handles login get and post 
 router.route('/login')
-  .get(unAuthenticatedUser, controllers.users.getLogin)
-  .post(controllers.users.postLogin)
+  	.get(unAuthenticatedUser, controllers.auth.getLogin)
+	.post(controllers.auth.postLogin)
 
+// Handles logout get 
+router.route("/logout")
+  	.get(controllers.auth.getLogout)
+
+// Handles User List page
 router.route('/users')
 	.get(controllers.users.show);
 
+// Handles user index page 
 router.route('/users/:username')
 	.get(controllers.users.index);
 
+// Handles edit page for specific user 
 router.route('/users/:username/edit')
 	.get(controllers.users.edit)
 	.post(controllers.users.update);
 
+// Handles deletion of certain list items 
 router.route('/workspaceItems/:id')
 	.delete(controllers.workspaceItems.destroy);
 
+// Handles search function for AJAX calls 
 router.route('/software/search/:software')
 	.get(controllers.softwares.search);
 
