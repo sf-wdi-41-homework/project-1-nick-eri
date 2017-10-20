@@ -34,6 +34,10 @@ router.route('/newprofile')
 router.route('/newprofile/:id/complete')
 	.post(authenticatedUser, controllers.users.newProfileUpdate);
 
+router.route('/login')
+  .get(unAuthenticatedUser, controllers.users.getLogin)
+  .post(usersController.postLogin)
+
 router.route('/users')
 	.get(controllers.users.show);
 
