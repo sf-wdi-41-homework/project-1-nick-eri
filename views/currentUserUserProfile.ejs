@@ -1,0 +1,38 @@
+<a href="/users/<%= user.username %>/edit"><button>Edit</button></a>
+<h2><%= user.username %></h2>
+<img src="/images/<%= user.avatar %>" alt="user.username">
+<h3><%= user.jobTitle %></h3>
+<h3><%= user.jobField %></h3>
+<p><%= user.blurb %></p>
+
+<ul id="user-workspace-list" class="container">
+	<% workspaceItems.forEach(function(item) { %>
+		<li _id="<%= item._id %>" class="row">
+			<div class="col-sm-9">
+				<h3><%= item._softwareId.name %></h3>
+				<p><%= item.description %></p>
+			</div>
+			<div class="col-sm-3">
+
+				<button _id="<%= item._id %>" class="btn btn-danger remove-workspaceItem">Remove</button>	
+
+			</div>
+		</li>
+	<% }); %>
+</ul>
+
+
+<form method="post" autocomplete="off">
+  	<div id="search-form" class="form-group">
+    	<label for="software">Software Search</label>
+    	<input class="form-control" type="text" name="software" id="software-search" default="Search">
+    	<ul id="search-dropdown"></ul>
+  	</div>
+
+  	<div class="form-group">
+	    <label for="description">Why you use it? </label>
+	    <textarea class="form-control" type="text" name="description" id="software-description"></textarea> 
+  	</div>
+  	<input class="btn btn-success" type="submit" value="Add">
+</form>
+
