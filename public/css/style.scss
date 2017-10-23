@@ -9,9 +9,43 @@ body{
 	background: url(/images/code.jpg) no-repeat;
 	background-size: cover;  
 	height: 600px;
+	position: relative;
+	color: #fff;
+	margin-bottom: 100px;
+	&:before{
+		content: ''; 
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,.5);
+	}
+	.container{
+		height: 600px;
+		position: relative;
+		z-index: 10;
+		div{
+			position: absolute;
+			bottom: 40px; 
+			left: 40px;
+			width: 40%;
+			h1{
+				text-transform: uppercase;
+				font-size: 4em;
+			}
+			p{
+				font-size: 2em;
+			}
+		}
+	}
 }
 
 // Userpage Styling
+#profile-page{
+	span{display: block;font-weight: bold;}
+}
 
 .profile-image{
 	img{

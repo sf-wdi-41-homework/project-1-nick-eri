@@ -1,5 +1,5 @@
 
-<div class="container">
+<div id="profile-page" class="container">
 	<div class="row">
 		<div class="col-md-9">
 			<h1><%= user.username %></h1>
@@ -13,8 +13,8 @@
 			<img src="/images/something.png" alt="Profile Picture">
 		</div>
 		<div class="col-sm-8">
-			<h3>Job: <%= user.jobTitle %></h3>
-			<h3>Field: <%= user.jobField %></h3>
+			<h3><span>Job:</span> <%= user.jobTitle %></h3>
+			<h3><span>Field:</span> <%= user.jobField %></h3>
 			<p><%= user.blurb %></p>			
 		</div>
 	</div>

@@ -1,20 +1,21 @@
+<div class="container">
+  <h2><%= user.username %></h2>
+  <form method="post" action="/users/<%= user.username %>/edit">
+    	<div class="form-group">
+      	<label for="job_title">Job Title</label>
+      	<input class="form-control" type="text" name="jobTitle" id="job_title" value="<%= user.jobTitle %>">
+    	</div>
 
-<h2><%= user.username %></h2>
-<form method="post" action="/users/<%= user.username %>/edit">
-  	<div class="form-group">
-    	<label for="job_title">Job Title</label>
-    	<input class="form-control" type="text" name="jobTitle" id="job_title" value="<%= user.jobTitle %>">
-  	</div>
+    	<div class="form-group">
+  	    <label for="job_field">Job Field</label>
+  	    <input class="form-control" type="text" name="jobField" id="job_field" value="<%= user.jobField %>">
+    	</div>
 
-  	<div class="form-group">
-	    <label for="job_field">Job Field</label>
-	    <input class="form-control" type="text" name="jobField" id="job_field" value="<%= user.jobField %>">
-  	</div>
+    	<div class="form-group">
+  	    <label for="blurb">Blurb</label>
+  	    <textarea class="form-control" type="text" name="blurb" id="blurb"><%= user.blurb %></textarea> 
+    	</div>
 
-  	<div class="form-group">
-	    <label for="blurb">Blurb</label>
-	    <textarea class="form-control" type="text" name="blurb" id="blurb"><%= user.blurb %></textarea> 
-  	</div>
-
-  	<input class="btn btn-success" type="submit" value="Save">
-</form>
+    	<input class="btn btn-success" type="submit" value="Save">
+  </form>
+</div>
