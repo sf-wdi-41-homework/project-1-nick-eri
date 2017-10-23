@@ -1,57 +1,78 @@
-<a href="/users/<%= user.username %>/edit"><button>Edit</button></a>
-<h2><%= user.username %></h2>
-<img src="/images/<%= user.avatar %>" alt="user.username">
-<h3><%= user.jobTitle %></h3>
-<h3><%= user.jobField %></h3>
-<p><%= user.blurb %></p>
 
-<ul id="user-workspace-list" class="container">
-	<% workspaceItems.forEach(function(item) { %>
-		<li _id="<%= item._id %>" class="row">
-			<div class="col-sm-9">
-				<h3><%= item._softwareId.name %></h3>
-				<p><%= item.description %></p>
-			</div>
-			<div class="col-sm-3">
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<h1><%= user.username %></h1>
+		</div>
+		<div class="col-md-3">
+			<a href="/users/<%= user.username %>/edit"><button>Edit</button></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 profile-image">
+			<img src="/images/something.png" alt="Profile Picture">
+		</div>
+		<div class="col-sm-8">
+			<h3>Job: <%= user.jobTitle %></h3>
+			<h3>Field: <%= user.jobField %></h3>
+			<p><%= user.blurb %></p>			
+		</div>
+	</div>
 
-				<button _id="<%= item._id %>" class="btn btn-danger remove-workspaceItem">Remove</button>	
+	<h2>Workspace</h2>
+	<ul id="user-workspace-list" class="container">
+		<% workspaceItems.forEach(function(item) { %>
+			<li _id="<%= item._id %>" class="row userpage-row">
+				<div class="col-sm-9">
+					<h3><%= item._softwareId.name %></h3>
+					<p><%= item.description %></p>
+				</div>
+				<div class="col-sm-3 remove-button-container">
+					<button _id="<%= item._id %>" class="btn btn-danger remove-workspaceItem">Remove</button>	
+				</div>
+			</li>
+		<% }); %>
+	</ul>
 
-			</div>
-		</li>
-	<% }); %>
-</ul>
+	<div class="row">
+		<div class="col-sm-9">
+			
+			<form method="post" autocomplete="off" action="/workspaceitems/create">
+			  	<div id="search-form" class="form-group">
+			    	<label for="software">Software Search</label>
+			    	<input class="form-control" type="text" name="software" id="software-search" default="Search">
+			    	<ul id="search-dropdown"></ul>
+			  	</div>
 
-
-<form method="post" autocomplete="off" action="/workspaceitems/create">
-  	<div id="search-form" class="form-group">
-    	<label for="software">Software Search</label>
-    	<input class="form-control" type="text" name="software" id="software-search" default="Search">
-    	<ul id="search-dropdown"></ul>
-  	</div>
-
-  	<div class="form-group">
-	    <label for="description">Why you use it? </label>
-	    <textarea class="form-control" type="text" name="description" id="software-description"></textarea> 
-  	</div>
-  	<input type="hidden" name="id" id="workspace-item-id" value="">
-  	<input type="hidden" name="userId" id="user-id" value="<%= user._id %>">
-  	<input class="btn btn-success" type="submit" value="Add">
-</form>
+			  	<div class="form-group">
+				    <label for="description">Why you use it? </label>
+				    <textarea class="form-control" type="text" name="description" id="software-description"></textarea> 
+			  	</div>
+			  	<input type="hidden" name="id" id="workspace-item-id" value="">
+			  	<input type="hidden" name="userId" id="user-id" value="<%= user._id %>">
+			  	<input class="btn btn-success" type="submit" value="Add">
+			</form>
+		</div>
+	</div>
+</div>
 
 <script>
 // Start Document Ready
 $(document).ready(function(){
 	console.log("Sanity Check!")
 
+	// Click event for removing item from user page
 	$('.remove-workspaceItem').on('click', function(event){
 		event.preventDefault();
 		removeWorkspaceItem(this);
 	});
 
+	// Event for search dropdown.
 	$('#software-search').on('keydown',function(event){
 		updateSearchBox(this);
 	})
 
+	// Click even for dropdown selection 
 	$('#search-dropdown').on('click','.search-result', function(event){
 		event.preventDefault();
 		populateSearchField(this);
@@ -59,6 +80,7 @@ $(document).ready(function(){
 });
 // End Doctument Ready 
 
+// Function to run backend ajax call 
 function removeWorkspaceItem(clickedItem){
 	let workspaceItem_id = $(clickedItem).attr('_id');
 
@@ -70,15 +92,18 @@ function removeWorkspaceItem(clickedItem){
 	});
 }
 
+// On success of backend deletion, remove DOM object
 function workspaceItemDeleteSuccess(json){
 	console.log(json);
 	$(`li[_id="${json._id}"]`).remove();
 }
 
+// Error Function for Item Delete
 function workspaceItemDeleteError(){
 	console.log("Delete error!");
 }
 
+// Function to run AJAX to grab searchable items
 function updateSearchBox(formUpdated){
 	$.ajax({
 		url: `/software/search/${$(formUpdated).val()}`,
@@ -88,6 +113,7 @@ function updateSearchBox(formUpdated){
 	})
 }
 
+// On successful return of search objects
 function softwareSearchSuccess(json){
 	$('#search-dropdown').empty().addClass('active');
 	json.forEach(function(result){
@@ -96,10 +122,12 @@ function softwareSearchSuccess(json){
 	})
 }
 
+// ON error of search obects 
 function softwareSearchError(){
 	console.log('Software search failed'); 
 }
 
+// function on selection of list item 
 function populateSearchField(clickedResult){
 	$('#software-search').val($(clickedResult).text());
 	$('#workspace-item-id').val($(clickedResult).attr('_id'))

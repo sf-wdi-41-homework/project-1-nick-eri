@@ -1,5 +1,18 @@
 body {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  padding: 0 0 400px 0; }
+
+#welcome {
+  width: 100%;
+  background: url(/images/code.jpg) no-repeat;
+  background-size: cover;
+  height: 600px; }
+
+.profile-image img {
+  width: 100%; }
+
+.remove-button-container {
+  padding: 20px; }
 
 #user-workspace-list {
   list-style: none; }

@@ -1,8 +1,22 @@
-<% users.forEach(function(user) { %>
-	<h2><%= user.username %></h2>
-	<p><%= user.blurb %> </p>
-	<a href="/users/<%= user.username %>">View Profile </a>
-<% }); %>
+<div class="container">
+	<h2>Users</h2>
+	<% users.forEach(function(user) { %>
+	<div class="row">
+		<div class="col-sm-12">
+			<h2><%= user.username %></h2>
+		</div>
+		<div class="col-sm-2 profile-image">
+			<img src="/images/something.png" alt="Profile Picture">
+		</div>
+		<div class="col-sm-8">
+			<h3>Job: <%= user.jobTitle %></h3>
+			<p><%= user.blurb %> </p>
+			<a href="/users/<%= user.username %>">View Profile </a>
+		</div>
+	</div>
+	<% }); %>
+</div>
+
 
 
 

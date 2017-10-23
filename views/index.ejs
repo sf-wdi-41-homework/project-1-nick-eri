@@ -2,4 +2,27 @@
   <div class="alert alert-danger"><%= message %></div>
 <% } %>
 
-Does this work? 
+<section id="welcome">
+	
+</section>
+
+<section id="top-users" class="container">
+	<h2>Top Workspaces!</h2>
+	<% users.forEach(function(user) { %>
+	<div class="row">
+		<div class="col-sm-12">
+			<h2><%= user.username %></h2>
+		</div>
+		<div class="col-sm-3 profile-image">
+			<img src="/images/something.png" alt="Profile Picture">
+		</div>
+		<div class="col-sm-6">
+			<p><%= user.blurb %> </p>
+			<a href="/users/<%= user.username %>">Read Workspace </a>
+		</div>
+	</div>
+	<% }); %>
+</section>
+
+
+
