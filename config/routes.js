@@ -60,6 +60,10 @@ router.route('/users/:username/edit')
 	.get(controllers.users.edit)
 	.post(controllers.users.update);
 
+// Handles creating of list items
+router.route('/workspaceitems/create')
+	.post(controllers.workspaceItems.create);
+
 // Handles deletion of certain list items 
 router.route('/workspaceItems/:id')
 	.delete(controllers.workspaceItems.destroy);
