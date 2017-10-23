@@ -34,6 +34,7 @@ function index(req,res){
                         res.status(500).send(err);
                         return;
                     }
+                    // Check is user is viewing their own page or someone elses or not logged in at all
                     if(!currentUser || foundUser.username !== currentUser.username.toString()){
                         res.render(
                         'userProfile.ejs', 
