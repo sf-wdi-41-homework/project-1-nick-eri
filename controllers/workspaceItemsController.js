@@ -10,7 +10,7 @@ function create(req,res){
 	    workspaceItem.description = req.body.description;
 	    workspaceItem.save(function(err, savedWorkspaceItem) {
 	      	if (err) { console.log('Saving workspace item failed'); }
-	      	res.json(savedWorkspaceItem);
+	      	res.redirect(`/users/${currentUser.username}`); 
 	    });
   	});
 }

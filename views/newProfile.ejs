@@ -1,29 +1,29 @@
 
-<h2><%= currentUser.local.email %></h2>
-<form method="POST" action="/newprofile/<%= currentUser._id %>/complete">
+<div class="container">
+  <h2><%= currentUser.local.email %></h2>
+  <form method="POST" action="/newprofile/<%= currentUser._id %>/complete">
 
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input class="form-control" type="text" name="username" id="username" value="">
-    </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" value="">
+      </div>
 
-  	<div class="form-group">
-    	<label for="job_title">Job Title</label>
-    	<input class="form-control" type="text" name="jobTitle" id="job_title" value="">
-  	</div>
+      <div class="form-group">
+        <label for="job_title">Job Title</label>
+        <input class="form-control" type="text" name="jobTitle" id="job_title" value="">
+      </div>
 
-  	<div class="form-group">
-	    <label for="job_field">Job Field</label>
-	    <input class="form-control" type="text" name="jobField" id="job_field" value="">
-  	</div>
+      <div class="form-group">
+        <label for="job_field">Job Field</label>
+        <input class="form-control" type="text" name="jobField" id="job_field" value="">
+      </div>
 
-  	<div class="form-group">
-	    <label for="blurb">Blurb</label>
-	    <textarea class="form-control" type="text" name="blurb" id="blurb"></textarea> 
-  	</div>
+      <div class="form-group">
+        <label for="blurb">Blurb</label>
+        <textarea class="form-control" type="text" name="blurb" id="blurb"></textarea> 
+      </div>
 
-  	<input class="btn btn-success" type="submit" value="Save">
-</form>
-
-<style>
-</style>
+      <input class="btn btn-success" type="submit" value="Save">
+  </form>
+    
+</div>

@@ -1,6 +1,5 @@
 
 <h2><%= user.username %></h2>
-<img src="/images/<%= user.avatar %>" alt="user.username">
 <form method="post" action="/users/<%= user.username %>/edit">
   	<div class="form-group">
     	<label for="job_title">Job Title</label>
@@ -19,6 +18,3 @@
 
   	<input class="btn btn-success" type="submit" value="Save">
 </form>
-
-<style>
-</style>
