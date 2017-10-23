@@ -20,7 +20,7 @@ function postSignup(req, res) {
 
 // Page after User Signs up 
 function newProfile(req,res){
-    res.render('newprofile.ejs');
+    res.render('newProfile');
 }
 
 // User updates information with username and basic info 
