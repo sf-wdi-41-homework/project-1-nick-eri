@@ -34,13 +34,24 @@ function index(req,res){
                         res.status(500).send(err);
                         return;
                     }
-                    res.render(
+                    // Check is user is viewing their own page or someone elses or not logged in at all
+                    if(!currentUser || foundUser.username !== currentUser.username.toString()){
+                        res.render(
                         'userProfile.ejs', 
                         {
                             message: req.flash('errorMessage'), 
                             user: foundUser, 
                             workspaceItems: workspaceItems
                         });
+                    }else if(foundUser.username === currentUser.username.toString()){
+                       res.render(
+                        'currentUserUserProfile.ejs', 
+                        {
+                            message: req.flash('errorMessage'), 
+                            user: foundUser, 
+                            workspaceItems: workspaceItems
+                        }); 
+                    }
                 });
         }else{
             res.send('user not found');
@@ -51,18 +62,22 @@ function index(req,res){
 // GET Displays form page for updating basic profile information 
 function edit(req,res){
     let username = req.params.username;
-    db.User.findOne({username: username}, function (err, foundUser) {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        res.render(
-            'userProfileEdit.ejs', 
-            {
-                message: req.flash('errorMessage'), 
-                user: foundUser
-            });
-    });
+    if(username === currentUser.username.toString()){
+        db.User.findOne({username: username}, function (err, foundUser) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            res.render(
+                'userProfileEdit.ejs', 
+                {
+                    message: req.flash('errorMessage'), 
+                    user: foundUser
+                });
+        });
+    } else {
+        res.redirect('/');
+    }
 
 }
 
