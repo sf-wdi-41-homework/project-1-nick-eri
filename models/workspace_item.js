@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema; 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema; 
 
-var WorkspaceItemSchema = new Schema({
+const WorkspaceItemSchema = new Schema({
 	_userId: {
 	    type: Schema.Types.ObjectId,
 	    ref: 'User'
@@ -13,5 +13,5 @@ var WorkspaceItemSchema = new Schema({
   	description: String
 })
 
-var WorkspaceItem = mongoose.model('WorkspaceItem', WorkspaceItemSchema);
+const WorkspaceItem = mongoose.model('WorkspaceItem', WorkspaceItemSchema);
 module.exports = WorkspaceItem; 

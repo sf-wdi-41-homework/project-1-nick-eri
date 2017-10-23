@@ -1,9 +1,9 @@
 // Functions handling routing for user information
-var db = require('../models');
+const db = require('../models');
 
 // GET Shows a list of all users logged into the site 
-function show(req,res){
-    db.User.find({}).exec(function(err, users){
+let show = (req,res) => {
+    db.User.find({}).exec((err, users) => {
         if(err){
             console.log(err);
             return; 
@@ -12,15 +12,15 @@ function show(req,res){
             'users.ejs',
             {
                 message: req.flash('errorMessage'),
-                users: users
+                users
             })
     })
 }
 
 // GET Displays the page of a user when given the username 
-function index(req,res){
+let index = (req,res) => {
     let username = req.params.username;
-    db.User.findOne({username: username}, function (err, foundUser) {
+    db.User.findOne({username: username}, (err, foundUser) => {
         if (err) {
             console.log(err);
             return;
@@ -29,7 +29,7 @@ function index(req,res){
             db.WorkspaceItem.find({_userId: foundUser._id})
                 .populate('_userId')
                 .populate('_softwareId')
-                .exec(function(err, workspaceItems){
+                .exec((err, workspaceItems) => {
                     if(err){
                         res.status(500).send(err);
                         return;
@@ -60,10 +60,10 @@ function index(req,res){
 }
 
 // GET Displays form page for updating basic profile information 
-function edit(req,res){
+let edit = (req,res) => {
     let username = req.params.username;
     if(username === currentUser.username.toString()){
-        db.User.findOne({username: username}, function (err, foundUser) {
+        db.User.findOne({username: username}, (err, foundUser) => {
             if (err) {
                 console.log(err);
                 return;
@@ -82,9 +82,9 @@ function edit(req,res){
 }
 
 // PUT Saves the updated information from the edit page. 
-function update(req,res){
+let update = (req,res) => {
     let username = req.params.username;
-    db.User.findOne({username: username}, function (err, foundUser) {
+    db.User.findOne({username: username}, (err, foundUser) => {
         if (err) {
             console.log(err);
             return;
@@ -92,7 +92,7 @@ function update(req,res){
         foundUser.jobTitle = req.body.jobTitle;
         foundUser.jobField = req.body.jobField;
         foundUser.blurb = req.body.blurb;
-        foundUser.save(function(err, saved) {
+        foundUser.save((err, saved) => {
             console.log('Updated ', foundUser.username);
             res.redirect(`/users/${foundUser.username}`);
         });
@@ -100,8 +100,8 @@ function update(req,res){
 }
     
 module.exports = {
-    show: show,
-    index: index,
-    edit: edit,
-    update: update
+    show,
+    index,
+    edit,
+    update
 };

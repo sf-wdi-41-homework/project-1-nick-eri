@@ -1,9 +1,9 @@
-var db = require('../models');
+const db = require('../models');
 
 // Handle static page routes
-function home(req, res) {  
-	var q = db.User.find({}).limit(3);
-	q.exec(function(err, users) {
+let home = (req, res) => {  
+	let q = db.User.find({}).limit(3);
+	q.exec((err, users) => {
      	if(err){
             console.log(err);
             return; 
@@ -18,5 +18,5 @@ function home(req, res) {
 }
 
 module.exports = {
-  	home: home,
+  	home
 }
