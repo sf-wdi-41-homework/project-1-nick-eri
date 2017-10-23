@@ -1,0 +1,50 @@
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
+  font-size: 0;
+}
+
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.header li {
+    float: left;
+}
+
+.header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.header li a:hover {
+    background-color: #111;
+}
+
+.box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin-top: 20px;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: white;
+}
+
+.name {
+  color:white;
+}
+
+.info {
+  color:white;
+}

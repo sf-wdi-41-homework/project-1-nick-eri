@@ -1,0 +1,88 @@
+.title {
+  border-bottom: 1px solid #000000;
+  padding-top: 20px;
+  margin-right: 200px;
+  margin-left: 200px;
+  margin-top: 30px;
+  background: url(code.jpg);
+  color: white;
+  text-decoration: bold;
+}
+
+.title h1 {
+  display: inline-block;
+  margin: 30px;
+  vertical-align: top;
+}
+
+.title p {
+  display: inline-block;
+  margin:30px;
+  margin-left: 20px;
+}
+
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
+  font-size: 0;
+}
+
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.header li {
+    float: left;
+}
+
+.header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.header li a:hover {
+    background-color: #111;
+}
+
+.c1 {
+  margin-bottom: 30px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: white;
+}
+
+.name {
+    color: grey;
+    font-size: 18px;
+}
+
+#form1 {
+ display : none;
+}
+button {
+ margin-bottom: 10px;
+}
+
+.signup {
+  float: right;
+}
+
+.login {
+  float:right;
+}
