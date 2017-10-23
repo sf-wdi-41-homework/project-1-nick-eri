@@ -1,15 +1,15 @@
 // Functions that control authentication 
-var db = require('../models');
-var passport = require("passport");
+const db = require('../models');
+const passport = require("passport");
 
 // GET /signup
-function getSignup(req, res) {
+let getSignup = (req, res) => {
     res.render('signup', { message: req.flash('errorMessage') })
 }
 
 // POST /signup
-function postSignup(req, res) {
-    var signupStrategy = passport.authenticate('local-signup', {
+let postSignup = (req, res) => {
+    let signupStrategy = passport.authenticate('local-signup', {
         successRedirect: "/newprofile",
         failureRedirect: "/signup",
         failureFlash: true
@@ -19,13 +19,13 @@ function postSignup(req, res) {
 }
 
 // Page after User Signs up 
-function newProfile(req,res){
+let newProfile = (req,res) => {
     res.render('newProfile');
 }
 
 // User updates information with username and basic info 
-function newProfileUpdate(req,res){
-    db.User.findById(req.params.id, function(err,foundUser){
+let newProfileUpdate = (req,res) => {
+    db.User.findById(req.params.id, (err,foundUser) => {
         if (err) {
             console.log(err);
             return;
@@ -42,13 +42,13 @@ function newProfileUpdate(req,res){
 }
 
 // GET /login
-function getLogin(req, res) { 
+let getLogin = (req, res) => { 
   res.render('login', { message: req.flash('errorMessage') })
 }
 
 // POST /login 
-function postLogin(req, res) {
-  var loginStrategy = passport.authenticate('local-login', {
+let postLogin = (req, res) => {
+  let loginStrategy = passport.authenticate('local-login', {
     successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true
@@ -58,17 +58,17 @@ function postLogin(req, res) {
 }
 
 // GET /logout
-function getLogout(req, res) {
+let getLogout = (req, res) => {
   req.logout();
   res.redirect("/");
 }
 
 module.exports = {
-    getSignup: getSignup,
-    postSignup: postSignup,
-    newProfile: newProfile,
-    newProfileUpdate: newProfileUpdate,
-    getLogin: getLogin,
-    postLogin: postLogin,
-    getLogout: getLogout
+    getSignup,
+    postSignup,
+    newProfile,
+    newProfileUpdate,
+    getLogin,
+    postLogin,
+    getLogout
 }
