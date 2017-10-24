@@ -17,8 +17,7 @@ let create = (req,res) => {
 
 // Handles user removing list items from their profile 
 let destroy = (req,res) => {
-	let workspaceItem_id = parseInt();
-
+	console.log(req.params.id);
 	db.WorkspaceItem.findById(req.params.id, (err,foundWorkspaceItem) => {
         res.json(foundWorkspaceItem);
 		foundWorkspaceItem.remove()
