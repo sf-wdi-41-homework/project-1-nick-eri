@@ -11,9 +11,9 @@ const UserSchema = new Schema({
 	jobField: String,
 	blurb: String,
 	votes: Number,
-	local : {
-	    email        : String,
-	    password     : String
+	local: {
+	    email: String,
+	    password: String
   	}
 })
 
