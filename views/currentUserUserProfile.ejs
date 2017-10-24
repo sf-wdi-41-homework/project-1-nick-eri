@@ -58,17 +58,17 @@
 
 <script>
 // Start Document Ready
-$(document).ready(()=>{
+$(document).ready(function(){
 	console.log("Sanity Check!")
 
 	// Click event for removing item from user page
-	$('.remove-workspaceItem').on('click', (event) => {
+	$('.remove-workspaceItem').on('click', function(event){
 		event.preventDefault();
 		removeWorkspaceItem(this);
 	});
 
 	// Event for search dropdown.
-	$('#software-search').on('keydown', (event) => updateSearchBox(this));
+	$('#software-search').on('keydown', function(event) {updateSearchBox(this)})
 
 	// Click even for dropdown selection 
 	$('#search-dropdown').on('click','.search-result', function(event){
@@ -79,7 +79,7 @@ $(document).ready(()=>{
 // End Doctument Ready 
 
 // Function to run backend ajax call 
-let removeWorkspaceItem = (clickedItem) => {
+function removeWorkspaceItem(clickedItem){
 	let workspaceItem_id = $(clickedItem).attr('_id');
 
 	$.ajax({
@@ -91,15 +91,17 @@ let removeWorkspaceItem = (clickedItem) => {
 }
 
 // On success of backend deletion, remove DOM object
-let workspaceItemDeleteSuccess = json => {
+function workspaceItemDeleteSuccess(json){
 	$(`li[_id="${json._id}"]`).remove();
 }
 
 // Error Function for Item Delete
-let workspaceItemDeleteError =  => console.log("Delete error!");
+function workspaceItemDeleteError(){
+	console.log("Delete error!");
+}
 
 // Function to run AJAX to grab searchable items
-let updateSearchBox = formUpdated => {
+function updateSearchBox(formUpdated){
 	$.ajax({
 		url: `/software/search/${$(formUpdated).val()}`,
 		method: 'GET',
@@ -109,19 +111,21 @@ let updateSearchBox = formUpdated => {
 }
 
 // On successful return of search objects
-let softwareSearchSuccess = json => {
+function softwareSearchSuccess(json){
 	$('#search-dropdown').empty().addClass('active');
-	json.forEach((resul => {
+	json.forEach(function(result){
 		let searchItem = `<li><a class='search-result' _id='${result._id}'>${result.name}</a></li>`;
 		$('#search-dropdown').append(searchItem)
 	})
 }
 
 // ON error of search obects 
-let softwareSearchError = () => console.log('Software search failed'); 
+function softwareSearchError(){
+	console.log('Software search failed'); 
+}
 
 // function on selection of list item 
-let populateSearchField = clickedResult => {
+function populateSearchField(clickedResult){
 	$('#software-search').val($(clickedResult).text());
 	$('#workspace-item-id').val($(clickedResult).attr('_id'))
 	$('#search-dropdown').removeClass('active');
