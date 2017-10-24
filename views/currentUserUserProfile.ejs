@@ -91,7 +91,7 @@ let removeWorkspaceItem = (clickedItem) => {
 }
 
 // On success of backend deletion, remove DOM object
-let workspaceItemDeleteSuccess(json) => {
+let workspaceItemDeleteSuccess = json => {
 	$(`li[_id="${json._id}"]`).remove();
 }
 
